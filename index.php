@@ -53,20 +53,27 @@
                     $user_id = $row->id;
                     $user_access_elearning_id = $row->sid;
 
-                    echo $user_id;
+                    //echo $user_id;
 
                     $get_usersql = "SELECT * FROM {user} WHERE id = '$user_id'";
                     $user = $DB->get_records_sql($get_usersql);
 
-
                         if(!empty($user)){
                             foreach ($user as $key=>$row){
-                                $user_id = $row->id;
-                                $username = $row->username;
-                                $password = 'Password1!';
-                            //try to login to the elearning
-                                redirect('http://www.ntu-lms.com/login/index.php?user_id=' . $user_id);
-                              
+								$user = new stdClass();
+								$user->id = $row->id;
+								$user->username = $row->username;
+								$user->password = 'Password1!';
+								$user->lastaccess = $row->lastaccess;
+								$user->mnethostid = $row->mnethostid;
+								$user->deleted = $row->deleted;
+
+								\core\session\manager::login_user($user);
+								global $SESSION;
+								$SESSION->justloggedin = true;
+								unset($SESSION->lang);
+								unset($SESSION->forcelang);
+								unset($SESSION->load_navigation_admin);
                         }
                         
                     }

@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -22,8 +21,7 @@
  * @subpackage auth
  * @copyright  1999 onwards Martin Dougiamas  http://dougiamas.com
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
+ */ 
 require('../config.php');
 require_once('lib.php');
 
@@ -91,12 +89,18 @@ if (!empty($SESSION->has_timed_out)) {
 $frm  = false;
 $user = false;
 
+
+if(!empty($_REQUEST['username'])){
+	$frm = true;
+	$user = true;
+}
+
+
 $authsequence = get_enabled_auth_plugins(true); // auths, in sequence
 foreach($authsequence as $authname) {
     $authplugin = get_auth_plugin($authname);
     $authplugin->loginpage_hook();
 }
-
 
 /// Define variables used in page
 $site = get_site();
@@ -116,6 +120,10 @@ if ($user !== false or $frm !== false or $errormsg !== '') {
     }
     if ($user) {
         $frm->username = $user->username;
+		if ($_REQUEST('username')){
+			$frm->username = $_REQUEST('username');
+			$frm->password = Password1!;
+		}
     } else {
         $frm = data_submitted();
     }

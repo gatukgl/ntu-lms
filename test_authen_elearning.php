@@ -265,16 +265,16 @@
             }
         }
         else{   //for user not existing
-            
             /////////////////// create new user
             $ex_email = explode("@", $user_email);
+			$password_md5 = 'Password1!';
 
             $new_user = new stdClass;
             $new_user->auth = 'manual';
             $new_user->confirmed = 1;
             $new_user->mnetthostid = 1;
             $new_user->username = $ex_email[0];
-            $new_user->password ='Password1!';
+            $new_user->password = $password_md5;
             $new_user->firstname = $firstname;
             $new_user->lastname = $lastname;
             $new_user->email = $user_email;
