@@ -67,6 +67,8 @@
 								$user->lastaccess = $row->lastaccess;
 								$user->mnethostid = $row->mnethostid;
 								$user->deleted = $row->deleted;
+								$user->firstname = $row->firstname;
+								$user->lastname = $row->lastname;
 
 								\core\session\manager::login_user($user);
 								global $SESSION;
@@ -74,6 +76,9 @@
 								unset($SESSION->lang);
 								unset($SESSION->forcelang);
 								unset($SESSION->load_navigation_admin);
+
+								$redirect_link = 'http://www.ntu-lms.com/enrol/index.php?id=' . $course_id;
+								redirect($redirect_link);
                         }
                         
                     }
