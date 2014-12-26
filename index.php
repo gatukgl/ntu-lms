@@ -53,7 +53,13 @@
                     $user_id = $row->id;
                     $user_access_elearning_id = $row->sid;
 
-                    //echo $user_id;
+					$get_courseid = "SELECT * FROM {course} WHERE shortname = '" . $user_access_elearning_id . "'"; 
+					$course = $DB->get_records_sql($get_courseid);
+					if(!empty($course)){
+						foreach ($course as $key=>$row){
+							$course_access_id = $row->id;
+						}
+					}
 
                     $get_usersql = "SELECT * FROM {user} WHERE id = '$user_id'";
                     $user = $DB->get_records_sql($get_usersql);
@@ -77,7 +83,8 @@
 								unset($SESSION->forcelang);
 								unset($SESSION->load_navigation_admin);
 
-								$redirect_link = 'http://www.ntu-lms.com/enrol/index.php?id=' . $course_id;
+								$redirect_link = 'http://www.ntu-lms.com/course/view.php?id=' . $course_access_id;
+								//echo $redirect_link;
 								redirect($redirect_link);
                         }
                         
