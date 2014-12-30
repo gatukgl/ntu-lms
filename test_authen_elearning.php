@@ -181,10 +181,20 @@
 
                 $enroll = $DB->get_records_sql($sql);
 
-                foreach ($enroll as $key => $row) {
+                foreach ($enroll as $key => $row) 
                     $enrol_id = $row->id;
                     break;
                 }
+
+				if ($course_id == 'D-001') {
+					$enrol_id = 3;
+				}
+				elseif ($course_id == 'D-002') {
+					$enrol_id = 6;
+				}
+				elseif ($course_id == 'D-003') {
+					$enrol_id = 9;
+				}
 
                 $crs_enroll = new stdClass;
                 $crs_enroll->status = 0;
@@ -303,6 +313,16 @@
                 $enrol_id = $row->id;
                 break;
             }
+
+			if ($course_id == 'D-001') {
+				$enrol_id = 3;
+			}
+			elseif ($course_id == 'D-002') {
+				$enrol_id = 6;
+			}
+			elseif ($course_id == 'D-003') {
+				$enrol_id = 9;
+			}
 
             $crs_enroll = new stdClass;
             $crs_enroll->status = 0;

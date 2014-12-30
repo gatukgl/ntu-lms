@@ -76,7 +76,7 @@
 								$user->firstname = $row->firstname;
 								$user->lastname = $row->lastname;
 
-								echo $user->id;
+								//echo $user->id;
 								\core\session\manager::login_user($user);
 								global $SESSION;
 								$SESSION->justloggedin = true;
@@ -84,8 +84,8 @@
 								unset($SESSION->forcelang);
 								unset($SESSION->load_navigation_admin);
 
-								//$redirect_link = 'http://www.ntu-lms.com/course/view.php?id=' . $course_access_id;
-								//redirect($redirect_link);
+								$redirect_link = 'http://www.ntu-lms.com/course/view.php?id=' . $course_access_id;
+								redirect($redirect_link);
                         }
                         
                     }
