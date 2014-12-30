@@ -50,7 +50,7 @@
                 $user_token = $row->token;    
 
                 if (strcmp($user_token, $value_token) == 0){  
-                    $user_id = $row->id;
+                    $user_id = $row->userid;
                     $user_access_elearning_id = $row->sid;
 
 					$get_courseid = "SELECT * FROM {course} WHERE shortname = '" . $user_access_elearning_id . "'"; 
@@ -76,6 +76,7 @@
 								$user->firstname = $row->firstname;
 								$user->lastname = $row->lastname;
 
+								echo $user->id;
 								\core\session\manager::login_user($user);
 								global $SESSION;
 								$SESSION->justloggedin = true;
@@ -83,9 +84,8 @@
 								unset($SESSION->forcelang);
 								unset($SESSION->load_navigation_admin);
 
-								$redirect_link = 'http://www.ntu-lms.com/course/view.php?id=' . $course_access_id;
-								//echo $redirect_link;
-								redirect($redirect_link);
+								//$redirect_link = 'http://www.ntu-lms.com/course/view.php?id=' . $course_access_id;
+								//redirect($redirect_link);
                         }
                         
                     }
